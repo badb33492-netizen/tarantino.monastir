@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Tarantino – Café à Monastir</title>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#2a0a0d;--bg2:#3a1015;--ink:#f1e6cf;--mute:#c9b79a;--gold:#e8b100;--red:#c4161f;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#2a0a0d;--bg2:#3a1015;--ink:#f1e6cf;--mute:#c9b79a;--gold:#e8b100;--red:#c4161f}}
+*{box-sizing:border-box;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.55 "DM Sans",system-ui,sans-serif;overflow-x:hidden}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main{position:relative;z-index:1}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 6vw}
+.hero{align-items:flex-start}
+h1{font:400 clamp(3.4rem,15vw,11rem)/.9 "Alfa Slab One",Georgia,serif;color:var(--gold);letter-spacing:.01em;text-shadow:.04em .04em 0 var(--red)}
+.tag{margin-top:1.2rem;font-size:1.25rem;max-width:30ch}
+.chip{display:inline-flex;gap:.6rem;align-items:center;margin-top:1.6rem;padding:.55rem 1rem;border:2px solid var(--gold);border-radius:999px;font-weight:700}
+.chip b{color:var(--gold);font-size:1.3rem}
+.hint{margin-top:2.5rem;color:var(--mute);font-size:.95rem}
+h2{font:400 clamp(2rem,6vw,3.6rem)/1 "Alfa Slab One",Georgia,serif;color:var(--gold);margin-bottom:2rem}
+.panel{max-width:34rem;background:rgba(42,10,13,.82);backdrop-filter:blur(6px);border:2px solid var(--gold);padding:2rem}
+dl{display:grid;grid-template-columns:auto 1fr;gap:.9rem 1.5rem}
+dt{color:var(--mute)}dd{font-weight:700}
+.band{position:relative;height:3rem;margin:1.5rem 0 .6rem;background:var(--bg2);border:2px solid var(--mute)}
+.band i{position:absolute;top:0;bottom:0;left:calc(15/24*100%);width:calc(8/24*100%);background:var(--red)}
+.scale{display:flex;justify-content:space-between;font-size:.85rem;color:var(--mute)}
+.btn{display:inline-block;margin-top:1.5rem;padding:.9rem 1.6rem;background:var(--gold);color:#2a0a0d;font-weight:700;text-decoration:none;border:2px solid var(--gold)}
+.btn:hover{background:transparent;color:var(--gold)}
+.btn:focus-visible,a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.right{align-items:flex-end}
+.wide{max-width:64rem;width:100%}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:2rem 3rem}
+.menu h3{font:400 1.5rem/1.1 "Alfa Slab One",Georgia,serif;color:var(--gold);margin-bottom:1rem}
+.menu ul{list-style:none;padding:0}
+.menu li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px dashed rgba(201,183,154,.4)}
+.menu li span{display:block;font-weight:400;font-size:.88rem;color:var(--mute)}
+.menu li b{font-weight:700}
+.menu li em{font-style:normal;font-weight:700;color:var(--gold);white-space:nowrap}
+.unit{margin-top:1.2rem;font-size:.85rem;color:var(--mute)}
+footer{position:relative;z-index:1;padding:2rem 6vw;color:var(--mute);font-size:.9rem}
+@media(max-width:640px){section{padding:5rem 5vw}.panel{padding:1.4rem}}
+.tag,.hint{text-shadow:0 1px 10px #2a0a0d}
+.ig{position:fixed;z-index:5;top:calc(env(safe-area-inset-top,0px) + 1rem);right:max(1rem,env(safe-area-inset-right,0px));width:3.2rem;height:3.2rem;display:grid;place-items:center;border-radius:50%;background:var(--gold);color:#2a0a0d;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--red);transition:transform .15s}
+.ig:hover{transform:scale(1.1) rotate(-6deg)}
+.ig svg{width:1.6rem;height:1.6rem}
+.btn+.btn{margin-left:.8rem}
+.ig.ph{top:calc(env(safe-area-inset-top,0px) + 4.8rem);background:var(--red);color:var(--ink);box-shadow:3px 3px 0 var(--gold)}
+.tabs{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.8rem;margin-bottom:1.2rem;scrollbar-width:thin}
+.tabs button{flex:none;font:inherit;font-size:.9rem;color:var(--ink);background:transparent;border:2px solid var(--mute);padding:.4rem .9rem;border-radius:999px;cursor:pointer}
+.tabs button.on{background:var(--gold);border-color:var(--gold);color:#2a0a0d;font-weight:700}
+.tabs button:focus-visible,.ctl button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.stage{perspective:1400px;min-height:20rem}
+.menu.nx{animation:fn .5s ease both;transform-origin:left center}
+.menu.pv{animation:fp .5s ease both;transform-origin:right center}
+@keyframes fn{from{opacity:0;transform:rotateY(-35deg) translateX(30px)}}
+@keyframes fp{from{opacity:0;transform:rotateY(35deg) translateX(-30px)}}
+@media (prefers-reduced-motion:reduce){.menu.nx,.menu.pv{animation:none}}
+.ctl{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.5rem;flex-wrap:wrap}
+.ctl .btn{margin:0;font:inherit;font-weight:700;cursor:pointer}
+.ctl .btn:disabled{opacity:.35;cursor:default;background:transparent;color:var(--mute);border-color:var(--mute)}
+#pn{color:var(--mute);font-size:.9rem;flex:1;text-align:center;min-width:10rem}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<a class="ig" href="https://www.instagram.com/tarantino.monastir/" target="_blank" rel="noopener" aria-label="Instagram de Tarantino Monastir" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></a>
+<a class="ig ph" href="tel:+21658787728" aria-label="Appeler Tarantino Monastir au 58 787 728" title="Appeler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+<main>
+<section class="hero">
+  <h1>Tarantino</h1>
+  <p class="tag">Un café à Monastir, ouvert tous les jours jusqu’au soir.</p>
+  <p class="chip"><b>3,7</b> sur 374 avis Google</p>
+  <p class="hint">Faites défiler pour entrer dans le salon.</p>
+</section>
+
+<section class="right">
+  <div class="panel">
+    <h2>L’essentiel</h2>
+    <dl>
+      <dt>Type</dt><dd>Café</dd>
+      <dt>Budget</dt><dd>10 à 30 DT</dd>
+      <dt>Ville</dt><dd>Monastir</dd>
+      <dt>Code Plus</dt><dd>QR8H+5CH</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="panel wide" id="book">
+    <h2>Le menu</h2>
+    <nav class="tabs" id="tabs" aria-label="Catégories du menu"></nav>
+    <div class="stage"><div class="menu" id="pg" aria-live="polite"></div></div>
+    <div class="ctl"><button type="button" class="btn" id="pv">Page précédente</button><span id="pn"></span><button type="button" class="btn" id="nx">Page suivante</button></div>
+    <p class="unit">Prix en dinars tunisiens (DT). Glissez ou utilisez les flèches du clavier pour tourner les pages.</p>
+  </div>
+</section>
+
+<section>
+  <div class="panel">
+    <h2>Quand venir</h2>
+    <p>Le café est le plus fréquenté de 15 h à 23 h.</p>
+    <div class="band" role="img" aria-label="Affluence de 15 h à 23 h"><i></i></div>
+    <div class="scale"><span>0 h</span><span>12 h</span><span>24 h</span></div>
+  </div>
+</section>
+
+<section class="right">
+  <div class="panel">
+    <h2>Venir au café</h2>
+    <p>Ouvrez l’itinéraire dans Google Maps et lisez les avis des clients.</p>
+    <a class="btn" href="https://www.google.com/maps/place/tarantino+monastir/data=!4m2!3m1!1s0x130213328332e145:0xbc00f61d0502618b" target="_blank" rel="noopener">Ouvrir dans Google Maps</a><a class="btn" href="https://www.instagram.com/tarantino.monastir/" target="_blank" rel="noopener">Suivre sur Instagram</a><a class="btn" href="tel:+21658787728">Appeler le 58 787 728</a>
+  </div>
+</section>
+</main>
+<footer>Tarantino, Monastir. Note et avis : Google.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var canvas=document.getElementById('gl');
+if(!window.THREE){canvas.style.display='none';return;}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var R=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
+R.setPixelRatio(Math.min(devicePixelRatio,1.75));
+R.shadowMap.enabled=true;R.shadowMap.type=THREE.PCFSoftShadowMap;
+var S=new THREE.Scene();S.background=new THREE.Color(0x2a0a0d);S.fog=new THREE.Fog(0x2a0a0d,12,30);
+var cam=new THREE.PerspectiveCamera(45,1,.1,60);
+function V(x,y){return new THREE.Vector2(x,y)}
+function M(c,r){return new THREE.MeshStandardMaterial({color:c,roughness:r||.7})}
+function sh(o){o.castShadow=true;o.receiveShadow=true;return o}
+function tex(w,h,fn,rx,ry){var c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);var t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;if(rx)t.repeat.set(rx,ry);t.anisotropy=8;t._fn=fn;return t}
+function redraw(t){t._fn(t.image.getContext('2d'),t.image.width,t.image.height);t.needsUpdate=true}
+function rr(w,h,r){var s=new THREE.Shape(),x=-w/2,y=-h/2;s.moveTo(x+r,y);s.lineTo(x+w-r,y);s.quadraticCurveTo(x+w,y,x+w,y+r);s.lineTo(x+w,y+h-r);s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);s.lineTo(x+r,y+h);s.quadraticCurveTo(x,y+h,x,y+h-r);s.lineTo(x,y+r);s.quadraticCurveTo(x,y,x+r,y);return s}
+function rbox(p,w,h,d,bv,m,x,y,z){var g=new THREE.ExtrudeGeometry(rr(w-2*bv,h-2*bv,bv*1.5),{depth:d-2*bv,bevelEnabled:true,bevelThickness:bv,bevelSize:bv,bevelSegments:4,curveSegments:6});g.center();var o=sh(new THREE.Mesh(g,m));o.position.set(x,y,z);p.add(o);return o}
+function box(p,w,h,d,m,x,y,z){var o=sh(new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m));o.position.set(x,y,z);p.add(o);return o}
+function cyl(p,rt,rb,h,m,x,y,z){var o=sh(new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,20),m));o.position.set(x,y,z);p.add(o);return o}
+// brick wall with relief
+function bricks(bump){return function(g,w,h){g.fillStyle=bump?'#222':'#7d6b57';g.fillRect(0,0,w,h);
+ for(var r=0;r<16;r++)for(var i=-1;i<8;i++){var x=i*64+(r%2?32:0),l=bump?150+Math.random()*90:0;
+  g.fillStyle=bump?'rgb('+l+','+l+','+l+')':'hsl('+(16+Math.random()*16)+','+(20+Math.random()*16)+'%,'+(48+Math.random()*22)+'%)';
+  g.fillRect(x+3,r*32+3,58,26);
+  if(!bump&&Math.random()<.25){g.fillStyle='rgba(255,255,255,.08)';g.fillRect(x+3,r*32+3,58,8);}}
+ for(var n=0;n<500;n++){g.fillStyle='rgba(0,0,0,'+(Math.random()*.12)+')';g.fillRect(Math.random()*w,Math.random()*h,2,2);}};}
+var wall=sh(new THREE.Mesh(new THREE.PlaneGeometry(18,8),new THREE.MeshStandardMaterial({map:tex(512,512,bricks(false),4.5,2),bumpMap:tex(512,512,bricks(true),4.5,2),bumpScale:3,roughness:.95,color:0xd8c9b6})));
+wall.position.set(0,4,-3);S.add(wall);
+var wood=tex(512,512,function(g,w,h){for(var i=0;i<8;i++){g.fillStyle='hsl(22,42%,'+(15+Math.random()*9)+'%)';g.fillRect(i*64,0,62,h);
+ for(var k=0;k<40;k++){g.fillStyle='rgba(0,0,0,.12)';g.fillRect(i*64+Math.random()*60,Math.random()*h,1,20+Math.random()*80);}}},5,5);
+var floor=sh(new THREE.Mesh(new THREE.PlaneGeometry(30,30),new THREE.MeshStandardMaterial({map:wood,roughness:.45})));
+floor.rotation.x=-Math.PI/2;S.add(floor);
+var rugT=tex(512,512,function(g,w,h){g.fillStyle='#6e0f17';g.fillRect(0,0,w,h);g.strokeStyle='#e8b100';g.lineWidth=10;g.beginPath();g.arc(256,256,228,0,6.3);g.stroke();
+ g.lineWidth=3;g.beginPath();g.arc(256,256,200,0,6.3);g.stroke();g.fillStyle='rgba(232,177,0,.5)';
+ for(var i=0;i<24;i++){var a=i/24*6.28;g.beginPath();g.arc(256+Math.cos(a)*150,256+Math.sin(a)*150,8,0,6.3);g.fill();}});
+var rug=sh(new THREE.Mesh(new THREE.CircleGeometry(3.6,64),new THREE.MeshStandardMaterial({map:rugT,roughness:1})));
+rug.rotation.x=-Math.PI/2;rug.scale.y=.7;rug.position.set(0,.012,.6);S.add(rug);
+// pop-art posters (generic stylised figures)
+var fontsReady=[];
+function poster(type,bg,a,b,cap){var t=tex(512,640,function(g,w,h){g.save();g.scale(2,2);
+ g.fillStyle=bg;g.fillRect(0,0,256,320);
+ g.fillStyle='rgba(0,0,0,.16)';for(var y=0;y<320;y+=10)for(var x=(y/10%2)*5;x<256;x+=10){g.beginPath();g.arc(x,y,2.4,0,6.3);g.fill();}
+ g.lineWidth=4;g.strokeStyle='#111';g.lineJoin='round';
+ function E(x,y,rx,ry,c,s,e,k){g.fillStyle=c;g.beginPath();g.ellipse(x,y,rx,ry,0,s||0,e||6.3);if(k)g.closePath();g.fill();g.stroke();}
+ if(type==1){g.fillStyle='#151515';g.fillRect(36,100,184,130);g.strokeRect(36,100,184,130);
+  for(var k=0;k<6;k++){g.fillStyle=k%2?a:'#f5f5f5';g.beginPath();g.moveTo(36+k*31,58);g.lineTo(67+k*31,58);g.lineTo(46+k*31+31,98);g.lineTo(36+k*31+15,98);g.closePath();g.fill();g.stroke();}
+  g.fillStyle='#f5f5f5';g.fillRect(50,138,80,7);g.fillRect(50,164,120,7);g.fillRect(50,190,96,7);
+ }else{
+  g.fillStyle=b;g.fillRect(52,225,152,100);g.strokeRect(52,225,152,100);
+  g.fillStyle=a;g.fillRect(108,196,40,36);g.strokeRect(108,196,40,36);
+  E(128,140,58,76,a);
+  g.fillStyle='rgba(0,0,0,.28)';g.beginPath();g.ellipse(148,142,36,72,0,-1.57,1.57);g.fill();
+  if(type==2){E(128,84,46,40,'#111',Math.PI,0,1);g.fillStyle='#111';g.fillRect(54,84,148,12);g.strokeRect(54,84,148,12);}
+  else{E(128,92,66,46,b,Math.PI,0,1);}
+  g.fillStyle='#fff';g.fillRect(90,128,28,12);g.fillRect(138,128,28,12);g.fillStyle='#111';g.fillRect(100,128,10,12);g.fillRect(148,128,10,12);
+  g.beginPath();g.moveTo(128,138);g.lineTo(122,166);g.lineTo(134,166);g.stroke();
+  if(type==2){g.fillStyle='#111';g.fillRect(100,176,56,12);}else{g.fillStyle='#c4161f';g.fillRect(104,186,48,10);g.strokeRect(104,186,48,10);}
+ }
+ g.fillStyle='#111';g.fillRect(0,282,256,38);g.fillStyle=a;g.font='24px "Alfa Slab One",Georgia,serif';g.textAlign='center';g.textBaseline='middle';g.fillText(cap,128,302);
+ g.restore();});fontsReady.push(t);return t;}
+var pts=[poster(0,'#e8b100','#f1c9a5','#c4161f','ACTION!'),poster(1,'#c4161f','#e8b100',0,'CLAP'),poster(2,'#1f5fa8','#f1c9a5','#e8b100','CUT!')];
+var P=new THREE.Group();S.add(P);
+[-3,0,3].forEach(function(x,i){
+ box(P,2.2,2.7,.14,M(0x1a1209,.4),x,3.5,-2.92);box(P,2.0,2.5,.04,M(0xb8892b,.35),x,3.5,-2.85);
+ var p=new THREE.Mesh(new THREE.PlaneGeometry(1.85,2.35),new THREE.MeshStandardMaterial({map:pts[i],roughness:.55}));
+ p.position.set(x,3.5,-2.82);P.add(p);
+ var sp=new THREE.SpotLight(0xffe0b0,1.3,14,.55,.6);sp.position.set(x,6.5,0);sp.target.position.set(x,3.5,-3);S.add(sp);S.add(sp.target);
+});
+function neon(g,w,h){g.clearRect(0,0,w,h);g.font='150px "Alfa Slab One",Georgia,serif';g.textAlign='center';g.textBaseline='middle';
+ g.shadowColor='#ff2a4a';g.shadowBlur=36;g.fillStyle='#ffd9de';g.fillText('TARANTINO',w/2,h/2);g.fillText('TARANTINO',w/2,h/2);}
+var nt=tex(1024,256,neon);fontsReady.push(nt);
+var ns=new THREE.Mesh(new THREE.PlaneGeometry(6,1.5),new THREE.MeshBasicMaterial({map:nt,transparent:true}));
+ns.position.set(0,5.9,-2.9);S.add(ns);
+if(document.fonts&&document.fonts.load)document.fonts.load('100px "Alfa Slab One"').then(function(){fontsReady.forEach(redraw);if(reduce)draw(0);});
+// tufted bump
+var tuft=tex(128,128,function(g){g.fillStyle='#b4b4b4';g.fillRect(0,0,128,128);g.strokeStyle='#5a5a5a';g.lineWidth=5;
+ g.beginPath();g.moveTo(0,0);g.lineTo(64,64);g.lineTo(128,0);g.moveTo(0,128);g.lineTo(64,64);g.lineTo(128,128);g.stroke();
+ [[64,64],[0,0],[128,0],[0,128],[128,128]].forEach(function(c){var gr=g.createRadialGradient(c[0],c[1],0,c[0],c[1],26);gr.addColorStop(0,'#000');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(c[0]-26,c[1]-26,52,52);});},1.7,1.7);
+var leather=M(0x5e301c,.5),tufted=new THREE.MeshStandardMaterial({color:0x5e301c,roughness:.5,bumpMap:tuft,bumpScale:2.5});
+// sofa
+var sofa=new THREE.Group();sofa.position.set(0,0,-2.2);S.add(sofa);
+rbox(sofa,5.6,.7,1.45,.08,leather,0,.45,0);
+rbox(sofa,2.45,.34,1.25,.12,leather,-1.25,.93,.08);rbox(sofa,2.45,.34,1.25,.12,leather,1.25,.93,.08);
+rbox(sofa,5.6,1.5,.5,.14,tufted,0,1.5,-.5);
+[-2.5,2.5].forEach(function(x){rbox(sofa,.55,1.0,1.45,.14,tufted,x,1.0,0);
+ var r=cyl(sofa,.3,.3,1.45,leather,x,1.6,0);r.rotation.x=Math.PI/2;cyl(sofa,.07,.05,.18,M(0x1a1008),x*.95,.09,.5);cyl(sofa,.07,.05,.18,M(0x1a1008),x*.95,.09,-.5);});
+function cush(c){return new THREE.MeshStandardMaterial({roughness:.85,map:tex(128,128,function(g){g.fillStyle=c;g.fillRect(0,0,128,128);g.fillStyle='rgba(0,0,0,.18)';
+ for(var y=0;y<128;y+=12)for(var x=(y/12%2)*6;x<128;x+=12){g.beginPath();g.arc(x,y,2.5,0,6.3);g.fill();}g.strokeStyle='rgba(255,255,255,.7)';g.lineWidth=6;g.strokeRect(10,10,108,108);},.6,.6)});}
+[[-1.9,'#d7263d',.3],[-1.1,'#f6c445',-.25],[-.3,'#ff7aa2',.2],[.6,'#2b6cb0',-.2],[1.4,'#d7263d',.25],[2.1,'#f6c445',-.3]].forEach(function(c){
+ var q=rbox(sofa,.82,.82,.24,.1,cush(c[1]),c[0],1.5,-.12);q.rotation.z=c[2];q.rotation.x=-.28;});
+// table, cups, flowers
+var tb=new THREE.Group();tb.position.set(0,0,.9);S.add(tb);
+var tw=M(0x8a5a2b,.4);rbox(tb,3.2,.14,1.5,.05,tw,0,1,0);
+[[-1.4,-.6],[1.4,-.6],[-1.4,.6],[1.4,.6]].forEach(function(p){cyl(tb,.05,.035,1,M(0x2b1a10,.5),p[0],.5,p[1]);});
+var steam=[];
+function cup(x,z){var g=new THREE.Group();g.position.set(x,1.07,z);var w=M(0xf5efe6,.3);w.side=THREE.DoubleSide;
+ var c=sh(new THREE.Mesh(new THREE.LatheGeometry([V(.01,.02),V(.1,.02),V(.16,.08),V(.2,.26),V(.19,.26),V(.15,.1),V(.01,.06)],28),w));
+ var s=sh(new THREE.Mesh(new THREE.LatheGeometry([V(.01,0),V(.28,0),V(.36,.04),V(.35,.05),V(.27,.02),V(.01,.02)],28),w));
+ var cf=new THREE.Mesh(new THREE.CircleGeometry(.19,28),M(0x3b1f12,.2));cf.rotation.x=-Math.PI/2;cf.position.y=.22;
+ var hd=sh(new THREE.Mesh(new THREE.TorusGeometry(.07,.018,8,16,Math.PI*1.3),w));hd.position.set(.21,.15,0);hd.rotation.z=-1.9;
+ g.add(c,s,cf,hd);
+ for(var i=0;i<5;i++){var m=new THREE.Mesh(new THREE.SphereGeometry(.05,8,6),new THREE.MeshBasicMaterial({color:0xf1e6cf,transparent:true,opacity:0,depthWrite:false}));m.userData={p:i/5};g.add(m);steam.push(m);}
+ tb.add(g);}
+cup(.5,.15);cup(1.25,-.2);
+var vase=new THREE.Mesh(new THREE.CylinderGeometry(.22,.16,.42,20),new THREE.MeshStandardMaterial({color:0xcfe8e8,transparent:true,opacity:.4,roughness:.1}));
+vase.position.set(-.9,1.28,0);tb.add(vase);
+var fc=[0xd7263d,0xf28c28,0xc4161f,0xff5a36,0xf28c28];
+for(var f=0;f<11;f++){var ang=f/11*6.28,rd=.05+Math.random()*.2;
+ var fl=sh(new THREE.Mesh(new THREE.IcosahedronGeometry(.13+Math.random()*.06,1),M(fc[f%5],.8)));
+ fl.position.set(-.9+Math.cos(ang)*rd,1.62+Math.random()*.2,Math.sin(ang)*rd);tb.add(fl);
+ var st=cyl(tb,.01,.01,.4,M(0x2f6b3a),-.9+Math.cos(ang)*rd*.5,1.4,Math.sin(ang)*rd*.5);}
+box(tb,.28,.2,.28,M(0xf5efe6,.9),-.2,1.17,-.35).rotation.y=.5;
+// armchairs
+var fabric=M(0x5b4a3e,.95);
+[-2.6,2.6].forEach(function(x){var a=new THREE.Group();a.position.set(x,0,3.3);a.rotation.y=x<0?.25:-.25;S.add(a);
+ rbox(a,1.5,.5,1.4,.12,fabric,0,.65,0);rbox(a,1.5,1.35,.35,.14,fabric,0,1.25,.68);
+ [-.78,.78].forEach(function(s){rbox(a,.28,.8,1.3,.1,fabric,s,.95,0);});
+ [[-.6,-.5],[.6,-.5],[-.6,.5],[.6,.5]].forEach(function(p){cyl(a,.05,.035,.4,M(0x1a1008),p[0],.2,p[1]);});});
+// plant
+var pl=new THREE.Group();pl.position.set(-6.4,0,-1.8);S.add(pl);
+cyl(pl,.5,.38,.8,M(0x3a2a22,.8),0,.4,0);
+for(var n=0;n<14;n++){var lf=sh(new THREE.Mesh(new THREE.ConeGeometry(.16,1.6+Math.random()*.9,6),M(0x2f6b3a,.7)));
+ var an=n/14*6.28;lf.position.set(Math.cos(an)*.35,1.6,Math.sin(an)*.35);lf.rotation.set(Math.sin(an)*.55,0,-Math.cos(an)*.55);pl.add(lf);}
+// film reel
+var reel=new THREE.Group();reel.position.set(5.6,2.6,.5);S.add(reel);
+var disc=sh(new THREE.Mesh(new THREE.CylinderGeometry(1,1,.18,48),M(0xc4161f,.4)));disc.rotation.x=Math.PI/2;reel.add(disc);
+for(var h=0;h<5;h++){var a2=h/5*6.28,ho=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,.22,20),M(0x2a0a0d));ho.rotation.x=Math.PI/2;ho.position.set(Math.cos(a2)*.6,Math.sin(a2)*.6,0);reel.add(ho);}
+var hub=new THREE.Mesh(new THREE.CylinderGeometry(.18,.18,.26,20),M(0xe8b100,.3));hub.rotation.x=Math.PI/2;reel.add(hub);reel.rotation.y=-.5;
+// pendant lamps
+[-3.5,0,3.5].forEach(function(x){var g=new THREE.Group();g.position.set(x,4.5,1.2);S.add(g);
+ var shd=new THREE.Mesh(new THREE.LatheGeometry([V(.06,.3),V(.12,.28),V(.42,0),V(.4,-.02),V(.1,.24)],24),new THREE.MeshStandardMaterial({color:0x1b1b1b,roughness:.4,side:THREE.DoubleSide}));g.add(shd);
+ g.add(new THREE.Mesh(new THREE.SphereGeometry(.15,14,10),new THREE.MeshBasicMaterial({color:0xffd58a})));
+ box(g,.02,3,.02,M(0x111111),0,1.8,0);});
+// lights
+S.add(new THREE.AmbientLight(0xffd9b0,.5));S.add(new THREE.HemisphereLight(0xffe0c0,0x3a1a10,.3));
+var key=new THREE.SpotLight(0xffd29a,1.7,22,.9,.8);key.position.set(1,7,4);key.target.position.set(0,1,0);key.castShadow=true;
+key.shadow.mapSize.set(1024,1024);key.shadow.bias=-.0006;S.add(key);S.add(key.target);
+var tl=new THREE.PointLight(0xffb35c,.9,14);tl.position.set(0,3.4,1);S.add(tl);
+var nl=new THREE.PointLight(0xff2a4a,.9,10);nl.position.set(0,5.4,-1.5);S.add(nl);
+// dust motes
+var N=160,dp=new Float32Array(N*3);
+for(var d=0;d<N;d++){dp[d*3]=(Math.random()-.5)*14;dp[d*3+1]=Math.random()*6;dp[d*3+2]=-3+Math.random()*12;}
+var dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.BufferAttribute(dp,3));
+S.add(new THREE.Points(dg,new THREE.PointsMaterial({color:0xffd9a0,size:.04,transparent:true,opacity:.55,depthWrite:false})));
+var mx=0,my=0,sy=0;
+addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;if(reduce)draw(0)});
+addEventListener('scroll',function(){sy=scrollY/Math.max(1,document.body.scrollHeight-innerHeight);if(reduce)draw(0)});
+function size(){R.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.fov=innerWidth<720?60:45;cam.updateProjectionMatrix();if(reduce)draw(0);}
+addEventListener('resize',size);
+function draw(t){
+ cam.position.set(Math.sin(t*.2)*.6+mx*1.6+Math.sin(sy*6)*1.2,2.1+sy*.6-my*.4,10.5-sy*5.5);cam.lookAt(0,2.2,-3);
+ reel.rotation.z=t*.5;
+ nl.intensity=.9+(Math.sin(t*.9)>.85?Math.sin(t*40)*.15:0);
+ steam.forEach(function(m){var p=reduce?m.userData.p:((t*.25+m.userData.p)%1);m.position.set(Math.sin(p*8+m.userData.p*9)*.05,.3+p*.5,0);m.scale.setScalar(1+p*2.5);m.material.opacity=Math.sin(p*Math.PI)*.22;});
+ if(!reduce){var a=dg.attributes.position;for(var i=0;i<N;i++){a.array[i*3+1]+=.003;a.array[i*3]+=Math.sin(t+i)*.0008;if(a.array[i*3+1]>6)a.array[i*3+1]=0;}a.needsUpdate=true;}
+ R.render(S,cam);}
+var t0=performance.now();
+function loop(now){draw((now-t0)/1000);requestAnimationFrame(loop);}
+size();if(reduce)draw(0);else requestAnimationFrame(loop);
+})();
+</script>
+<script>
+(function(){
+var PG=[
+{t:'Entrées & salades',s:[
+['Nos entrées',['Soupe Tarantino||7.0','Portion frites||6.8','Poutine poulet||13.5','Poutine bœuf||16.5','Calamar doré||21.0','Moules à la crème||28.5']],
+['Salades',['César|Laitue, tomate, fromage, croûtons, escalope, noix, sauce César, parmesan|19.5','Sportive|Laitue, tomate, fromage blanc, ricotta, chia, blanc de poulet, noix, huile d’olive|26.5','Du Chef|Laitue, tomate, fromage, maïs, croûtons, chevrettes panées, fruits de saison, fruits secs, chia, noix|24.5','Tarantino|Laitue, maïs, fruits secs, croûtons, chia, chevrettes sautées, crevettes, moules|27.5','Saumon|Salade verte, tomate, saumon fumé, fromage blanc, parmesan, sauce balsamique, fruits de saison|32.5']]]},
+{t:'Asiatique & healthy',s:[
+['Asiatique',['Teppanyaki poulet||26.5','Teppanyaki crevettes||32.5','Wok de poulet||26.5','Wok de bœuf||34.5','Wok fruits de mer||32.0']],
+['Healthy food',['Régal sportif|Omelette (1 œuf + 3 blancs), ricotta, fromage blanc, chia|11.5','Végétarien sportif|Omelette (1 œuf + 3 blancs), épinards, ricotta, chia, fromage blanc, champignons|13.5','Intégral sportif|Poulet et chevrettes|23.8']]]},
+{t:'Petits déjeuners',s:[
+['Les formules',['Rapi Doose|Café ou chocolat, viennoiserie, mini jus|7.500','Court métrage|Café ou chocolat, eau 0,5 L, jus frais, mini omelette ou mini crêpe ou viennoiserie|10.500','Long métrage|Café ou chocolat, eau 0,5 L, jus frais, confiture, beurre, chocolat à tartiner, toast, fromage, mini omelette ou mini crêpe|16.500','English Breakfast|Café ou chocolat, jus frais, charcuterie, fromage, ricotta, œuf au plat, saucisses à la poêle, champignons, toast, beurre, tomate, laitue, pâte à crêpe|17.500','French Breakfast|Café ou chocolat, jus frais, eau 0,5 L, beurre, confiture, chocolat à tartiner, miel, ricotta, pâte à crêpe, pâte à gaufre, pancakes, mini gâteau, salade de fruits, viennoiserie, yaourt glacé|19.900']]]},
+{t:'Petits déjeuners (suite)',s:[
+['Les grands petits déjeuners',['Le Sportif||21.500','American Breakfast||24.500','Turkish Breakfast||24.500','Brunch|2 thés ou cafés, eau 1 L, 2 jus frais, 2 yaourts glacés, ricotta, crêpe salée, crêpe sucrée, mini gâteau, saucisses, burger, boulettes ou chocolat|54.800']]]},
+{t:'Cafés',s:[
+['Cafés',['Expresso||3.6','Américano||4.0','Capucin||4.0','Café crème||4.4','Chocolat au lait||4.4','Grande crème||4.8','Cappuccino||5.8','Spéculoos||7.8','Bueno Kinder||7.8','Oreo||7.8','Nutella||7.8']],
+['Gourmand',['Café gourmand|Café au choix, mini cheesecake|8.8','Café Tarantino|Tasse biscuit, expresso, Nutella, glace vanille|7.4']]]},
+{t:'Nespresso, latte & affogato',s:[
+['Nespresso',['Expresso||4.6','Américano||5.0','Capucin||5.0','Café crème||5.4','Grande crème||5.8','Cappuccino||6.8']],
+['Café latte',['Latte Cookies||7.4','Latte Vanille||7.4','Latte Caramel||7.4','Latte Noisette||7.4','Latte Spéculoos||7.4']],
+['Affogato (expresso + glace vanille)',['Classique||4.8','Nutella||6.8','Noisette||7.8','Pistache||7.8']]]},
+{t:'Burgers & formules',s:[
+['Burgers',['The Original|Viande hachée, laitue, oignons caramélisés, tomates, fromage|14.8','Kentucky Burger|Poulet pané, poivron, laitue, oignons, tomates sautées, fromage fondu|12.8','Buffalo Burger|Viande hachée, champignons sautés, oignons caramélisés, sauce BBQ, fromage fondu, bacon|18.8','King Kong Burger|2 viandes hachées, oignons sautés, laitue, tomate, fromage fondu, sauce BBQ|23.8','The Tarantino|2 viandes hachées, oignons caramélisés, laitue, tomate, fromage fondu, œuf, bacon, sauce BBQ|25.8']],
+['Formules',['Friends|Three Tos, crêpe tacos, frites, fromage, calamar doré, salade, baguette farcie|38.5','Tarantino|Three Tos, burger, fried chicken, frites, fruits de mer frits, pasta, soda|68.5','All time|Fried chicken, frites, cordon bleu, three tos, crêpe Nutella banane, 2 mini gâteaux, salade|75.0']]]},
+{t:'Pizzas',s:[
+['Pizzas',['Calzone|Sauce tomate, mozzarella, poulet ou thon|14.8','Margherita|Sauce tomate, mozzarella|14.8','Thon|Sauce tomate, mozzarella, thon, olives, tomate fraîche|18.5','Pepperoni|Sauce tomate, mozzarella, poivron, pepperoni|18.5','Mexicaine|Sauce piquante, mozzarella, viande hachée, poivron, oignon, tomate fraîche, pepperoni|22.5','Hawaïenne|Sauce rosée, mozzarella, champignons, poulet, oignon, poivron|21.5','4 Saisons|Sauce tomate, jambon, champignons, poivron, tomate fraîche, oignon, olives, thon|21.5','Santorini|Sauce tomate, mozzarella, légumes sautés, chevrettes|22.8','Fromages|Sauce blanche, mozzarella, grana padano, blue cheese, gruyère|24.8','Fruits de mer|Sauce tomate, mozzarella, fruits de mer|25.8','Saumon|Sauce rosée, ricotta, épinards, saumon fumé, noix|25.8']]]},
+{t:'Crêpes & omelettes',s:[
+['Crêpes salées',['Crêpe fromage||11.5','Thon fromage||12.8','Jambon fromage||13.8','Crêpe pizza|Thon, mozzarella, sauce tomate, olives|14.5','Poulet épinards||14.8','Crêpe tunisienne|Harissa, œuf, thon, olives, câpres, oignon frais, fromage|14.8','Crêpe pepperoni|Pepperoni, mozzarella, champignons grillés, oignons caramélisés|15.8','Crêpe italienne|Viande hachée, fromage, béchamel|17.5']],
+['Omelettes + frites',['Fromage||10.8','Thon fromage||11.5','Jambon fromage||11.5','Ricotta épinards||11.5','Escalope épinards||13.5','Régal|Jambon fumé, thon, champignons, fromage|14.5','Espagnole|Oignon, champignons, poivron, légumes sautés, fromage|15.8','Tarantino|Jambon, escalope, champignons, épinards, fromage|18.5']]]},
+{t:'Volailles & viandes',s:[
+['Volailles',['Escalope grillée||20.5','Escalope panée||22.5','Émincé champignons||23.5','Cordon bleu||24.5','2 cuisses de poulet grillées||24.5','Escalope 4 fromages||26.5','Émincé du chef||26.5','Fajitas (bœuf, poulet)||34.0','Volailles mexicaines||52.5','Escalope panée italienne||27.5','Escalope orientale||24.5','Escalope fruits de mer||32.0']],
+['Viandes',['Foie grillé||28.5','Steak de bœuf grillé||32.0','Cheese steak||34.5','Grillade mixte||34.5','Côte à l’os grillée||42.5','Filet de bœuf sauce champignons||46.5','Filet de bœuf sauce poivre||46.5','Grillade Tarantino||53.5']]]},
+{t:'Jus, smoothies & cocktails',s:[
+['Detox healthy',['Green|Pomme, citronnade, gingembre, menthe fraîche|12.5','Power|Pomme, carotte, ananas, citron, menthe fraîche, gingembre|12.6','Fresh|Kiwi, banane, menthe fraîche, miel|12.6','Dark|Fraise, fruits de bois, orange, gingembre|12.8','Vitamin|Orange, citron, menthe fraîche, gingembre, miel, épinards|']],
+['Smoothies',['Piña Colada|Noix de coco, ananas|11.8','Sweety|Fraise, framboise, fruits de bois|12.5','Punch|Orange, banane, fraise|','Blue Berry|Fraise, pomme, fruits de bois|12.6','Happy|Fraise, banane|13.5']],
+['Cocktails',['Franbo|Fraise, banane, fruits de bois|12.5','Exotic|Ananas, kiwi, banane|12.5','Apple Berry|Pomme, fruits de bois, fraise, framboise|13.5','Tropical|Ananas, mangue, pêche|13.5','Paradise|Mangue, kiwi, pêche, ananas|14.5']]]},
+{t:'Milkshakes & douceurs',s:[
+['Milkshakes',['Au choix|Vanille, fraise, pistache, caramel, chocolat|9.5','Nutella||11.5','Nutella Lotus||12.5','Nutella Oreo||12.5','Nutella Kinder||12.5','Nutella Snickers||12.5','Tarantino|Nutella, banane, fruits secs, Ferrero Rocher|16.6']],
+['Nos douceurs',['Fondant chocolat|Servi avec une boule de glace|7.5','Fondant Nutella||8.5','Fondant pistache||8.5','Fondant noisette||8.5','Tiramisu||7.5','Tiramisu Nutella||8.8','Tiramisu Spéculoos||8.8','Tiramisu Oreo||8.8','Tiramisu pistache||11.5']]]},
+{t:'Cheesecakes & San Sébastian',s:[
+['Cheesecakes',['Mini cheesecake|Nutella ou spéculoos|5.8','Nutella||8.5','Spéculoos||8.5','Oreo||8.5','Bueno||8.5','Pistache||9.5','Framboise||9.5','Raffaello||10.6','Ferrero Rocher||10.6']],
+['San Sébastian',['Nature||8.8','Nutella||11.8','Spéculoos||11.8','Choco blanc||10.8','Caramel||10.8','Pistache||12.8','Noisette||12.8','Nutella Spéculoos||14.5']]]}
+];
+var i=0,pg=document.getElementById('pg'),tabs=document.getElementById('tabs'),pn=document.getElementById('pn');
+if(!pg)return;
+PG.forEach(function(p,k){var b=document.createElement('button');b.type='button';b.textContent=p.t;b.addEventListener('click',function(){go(k)});tabs.appendChild(b);});
+function render(dir){var pgd=PG[i],h='';
+ pgd.s.forEach(function(s){h+='<div><h3>'+s[0]+'</h3><ul>';
+  s[1].forEach(function(x){var a=x.split('|');h+='<li><div><b>'+a[0]+'</b>'+(a[1]?'<span>'+a[1]+'</span>':'')+'</div><em>'+(a[2]?a[2].replace('.',','):'')+'</em></li>';});
+  h+='</ul></div>';});
+ pg.innerHTML=h;pg.className='menu';
+ if(dir){void pg.offsetWidth;pg.className='menu '+dir;}
+ pn.textContent='Page '+(i+1)+' sur '+PG.length+' : '+pgd.t;
+ [].forEach.call(tabs.children,function(b,k){b.className=k===i?'on':'';b.setAttribute('aria-current',k===i?'page':'false');if(k===i&&b.scrollIntoView){tabs.scrollLeft=b.offsetLeft-tabs.clientWidth/2+b.clientWidth/2;}});
+ document.getElementById('pv').disabled=i===0;document.getElementById('nx').disabled=i===PG.length-1;}
+function go(k){if(k<0||k>=PG.length||k===i)return;var d=k>i?'nx':'pv';i=k;render(d);}
+document.getElementById('pv').addEventListener('click',function(){go(i-1)});
+document.getElementById('nx').addEventListener('click',function(){go(i+1)});
+var bk=document.getElementById('book');
+bk.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1);});
+var sx=0;
+bk.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+bk.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>60)go(dx<0?i+1:i-1);},{passive:true});
+render();
+})();
+</script>
+</body>
+</html>
